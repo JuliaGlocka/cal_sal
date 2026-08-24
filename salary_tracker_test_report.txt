@@ -1,0 +1,61 @@
+SALARY TRACKER TEST REPORT
+===========================
+Overall result: WORKING
+Test file: tests/test_salary_tracker.py
+Application module: salary_tracker 2.0.py
+
+What was checked
+-----------------
+The acceptance tests checked calculations, formatting, salary input, currency conversion,
+time tracking, session recording, configuration persistence, and application shutdown.
+Tkinter widgets, network requests, and the real user configuration file were replaced with
+test doubles, so the test run was isolated from the desktop and external services.
+
+Application functions checked
+-----------------------------
+weekdays_before_today_this_week (line 44): Counts weekdays before today in the current week.
+weekdays_before_today_this_month (line 48): Counts weekdays before today in the current month.
+SalaryTracker.fmt_time (line 489): Formats elapsed time as hours, minutes, and seconds.
+SalaryTracker.fmt (line 152): Formats money using currency symbols and decimal rules.
+SalaryTracker.set_salary (line 391): Parses, validates, and stores the hourly salary.
+SalaryTracker._on_cur_change (line 402): Converts salary values using cached exchange rates.
+SalaryTracker.toggle_tracking (line 438): Starts, pauses, and resumes time tracking.
+SalaryTracker.reset_tracking (line 451): Records a session and clears the timer.
+SalaryTracker._record_session (line 464): Calculates and stores a completed session.
+SalaryTracker.load_config (line 93): Loads saved salary tracker configuration.
+SalaryTracker.save_config (line 105): Saves configuration and limits history to 100 sessions.
+SalaryTracker._on_close (line 514): Saves state and closes the application window.
+
+Test results
+------------
+PASS: test_weekly_earnings_count_prior_weekdays_only[day0-0]
+PASS: test_weekly_earnings_count_prior_weekdays_only[day1-4]
+PASS: test_weekly_earnings_count_prior_weekdays_only[day2-5]
+PASS: test_weekly_earnings_count_prior_weekdays_only[day3-5]
+PASS: test_monthly_earnings_count_prior_weekdays_and_exclude_today
+PASS: test_elapsed_time_is_zero_padded_and_truncates_fractional_seconds
+PASS: test_amounts_use_currency_symbols_and_currency_precision[USD-1234.5-$1,234.50]
+PASS: test_amounts_use_currency_symbols_and_currency_precision[JPY-1234.5-\xa51,234]
+PASS: test_salary_input_accepts_comma_decimal_and_saves
+PASS: test_invalid_or_negative_salary_input_becomes_zero[-5]
+PASS: test_invalid_or_negative_salary_input_becomes_zero[not-a-number]
+PASS: test_currency_change_requires_fx_rates
+PASS: test_currency_change_converts_from_base_currency_using_cached_rates
+PASS: test_fetch_request_uses_user_agent_and_stores_rates
+PASS: test_start_pause_and_resume_track_elapsed_time
+PASS: test_reset_records_session_and_clears_timer
+PASS: test_save_and_load_config_round_trip_and_limit_history
+PASS: test_malformed_config_does_not_crash_or_overwrite_defaults
+PASS: test_close_records_session_saves_and_destroys_window
+
+Summary
+-------
+Passed: 19
+Failed: 0
+Skipped: 0
+Total recorded checks: 19
+
+Interpretation
+--------------
+WORKING means every acceptance check completed successfully.
+NEEDS ATTENTION means at least one acceptance check failed and should be investigated.
